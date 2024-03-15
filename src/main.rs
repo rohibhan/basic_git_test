@@ -5,12 +5,22 @@ struct Person {
 }
 
 trait Speak {
-    fn say_hello(&self) -> String;
+    fn introduce(&self) -> String {
+        "Hello, My name is rahul and I am 21 years old".to_string()
+    }
+
+    fn reply(&self,_other:Person) -> String{
+        "Nice, to meet you".to_string()
+    }
 }
 
 impl Speak for Person {
-    fn say_hello(&self) -> String {
+    fn introduce(&self) -> String {
         format!("Hello, My name is {} and I am {} years old", self.name, self.age)
+    }
+
+    fn reply(&self,other:Person) -> String {
+        format!("Hello, Nice to meet you {}.My Name is {} and I am {} years old", other.name,self.name, self.age)
     }
 }
 
@@ -19,5 +29,12 @@ fn main() {
         name: String::from("Jinnal Parakh"),
         age: 29,
     };
-    println!("{:?}", person.say_hello());
+    println!("{:?}", person.introduce());
+
+    let person1 = Person {
+        name: String::from("Rohit Bhandari"),
+        age: 29,
+    };
+
+    println!("{:?}", person1.reply(person));
 }
